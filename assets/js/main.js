@@ -34,19 +34,17 @@ Generiamo un numero random (sempre da 1 a 5) per il computer (usando una funzion
 Sommiamo i due numeri Stabiliamo se la somma dei due numeri è pari o dispari (usando una funzione) 
 Dichiariamo chi ha vinto. */
 
-/**
- * 
- * @returns Number
- */
 function PcNumberRange1_5() {
     return Math.ceil(Math.random() * 5);
 }
 
-function PariDispari(userNumber, PcNumber){
+function PariDispari(userNumber, pcNumber){
     
-    if((userNumber + PcNumber) % 2 === 0){
+    if((Number(userNumber) + pcNumber) % 2 === 0){
+        console.log("PARI");
         return 'Pari';
     } else{
+        console.log("DISPARI");
         return 'Dispari';
     }
 }
@@ -54,25 +52,23 @@ function PariDispari(userNumber, PcNumber){
 document.getElementById('play').addEventListener('click', function() {
     //take win condition: if 1  Pari wins, if 2  dispari wins
     const winCondition = document.getElementById('choice').value;
-    //take user choice
+    //take user number
     const userNumber = document.getElementById('number').value;
+    //take pc number
+    const pcNumber = PcNumberRange1_5();
+    //communicate to use pc choice
+    document.getElementById('PcNumber').innerHTML = pcNumber;
+    //check if pari or dispari
+    const pariOrDispari = PariDispari(userNumber, pcNumber);
 
-    const pcNumber = PcNumberRange1_5()
-
-    document.getElementById('PcNumber').innerHTML = pcNumber
-    
-    const numberResult = PariDispari(userNumber, pcNumber)
-
-    if(winCondition === '1' && numberResult === 'Pari'){
-        document.getElementById('winner').innerHTML = 'Win'
-    } else if(winCondition === '2' && numberResult === 'Dispari'){
+    //dectretate winner
+    if((winCondition === '1' && pariOrDispari === 'Pari') || (winCondition === '2' && pariOrDispari === 'Dispari')){
         document.getElementById('winner').innerHTML = 'Win'
     } else{
-        document.getElementById('winner').innerHTML = 'Lost' 
+        document.getElementById('winner').innerHTML = 'Lost'
     }
 
-    console.log(winCondition, userNumber, pcNumber, numberResult);
-    
+    console.log(winCondition, userNumber, pcNumber, pariOrDispari);
 })
 
 
