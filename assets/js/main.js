@@ -42,9 +42,9 @@ function PcNumberRange1_5() {
     return Math.ceil(Math.random() * 5);
 }
 
-function PariDispari(userNumber, PcNumberRange1_5){
+function PariDispari(userNumber, PcNumber){
     
-    if((userNumber + PcNumberRange1_5) % 2 === 0){
+    if((userNumber + PcNumber) % 2 === 0){
         return 'Pari';
     } else{
         return 'Dispari';
@@ -58,8 +58,10 @@ document.getElementById('play').addEventListener('click', function() {
     const userNumber = document.getElementById('number').value;
 
     const pcNumber = PcNumberRange1_5()
+
+    document.getElementById('PcNumber').innerHTML = pcNumber
     
-    const numberResult = PariDispari()
+    const numberResult = PariDispari(userNumber, pcNumber)
 
     if(winCondition === '1' && numberResult === 'Pari'){
         document.getElementById('winner').innerHTML = 'Win'
@@ -68,8 +70,12 @@ document.getElementById('play').addEventListener('click', function() {
     } else{
         document.getElementById('winner').innerHTML = 'Lost' 
     }
+
+    console.log(winCondition, userNumber, pcNumber, numberResult);
     
 })
+
+
 
 
 
